@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    container_name: trovebazaar-db
+    image: postgres:18.6
+    environment:
+      POSTGRES_USER: ${POSTGRES_DB_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_DB_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql
+
+  # api:
+  #   container_name: trovebazaar-api
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - db
