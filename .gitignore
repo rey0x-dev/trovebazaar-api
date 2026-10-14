@@ -3,6 +3,7 @@
 
 # PostgreSQL data
 postgres/
+postgres-backup/
 
 # Maven
 target/
