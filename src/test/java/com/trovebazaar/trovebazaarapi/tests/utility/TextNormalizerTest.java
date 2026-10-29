@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class TextNormalizerTest {
 
     @Test
-    public void shouldNormalizeTextToTitleCaseAndTrimWhitespace() {
+    void shouldNormalizeTextToTitleCaseAndTrimWhitespace() {
         String text = "   Coacalco de BERRIOZABAL   ";
 
         String normalizedText = TextNormalizer.normalizeText(text);
@@ -16,22 +16,31 @@ public class TextNormalizerTest {
     }
 
     @Test
-    public void shouldReturnNullWhenTextIsNull() {
+    void shouldReturnNullWhenTextIsNull() {
         String normalizedText = TextNormalizer.normalizeText(null);
 
         assertNull(normalizedText);
     }
 
     @Test
-    public void shouldReturnEmptyStringWhenTextIsEmpty() {
+    void shouldReturnEmptyStringWhenTextIsEmpty() {
         String normalizedText = TextNormalizer.normalizeText(" ");
         assertEquals("", normalizedText);
     }
 
     @Test
-    public void shouldCollapseRepeatedWhitespaceBetweenWords() {
+    void shouldCollapseRepeatedWhitespaceBetweenWords() {
         String text = "Coacalco          De      Berriozabal";
         String normalizedText = TextNormalizer.normalizeText(text);
         assertEquals("Coacalco De Berriozabal", normalizedText);
+    }
+
+    @Test
+    void shouldReturnNormalizedSentence(){
+
+        String sentence = "  nEW     nAME ";
+        String normalizedSentence = TextNormalizer.normalizedSentence(sentence);
+
+        assertEquals("New name", normalizedSentence);
     }
 }
