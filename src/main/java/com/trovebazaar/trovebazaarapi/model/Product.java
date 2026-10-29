@@ -1,11 +1,10 @@
 package com.trovebazaar.trovebazaarapi.model;
 
+import com.trovebazaar.trovebazaarapi.dto.UpdateProductRequest;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 
@@ -29,4 +28,46 @@ public class Product {
             )
     })
     private Money price;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status",  nullable = false, length = 10)
+    private ProductStatus status;
+
+
+    public Product(Long productId, String qrCode, String description, Money price) {
+        this.productId = productId;
+        this.qrCode = qrCode;
+        this.description = description;
+        this.price = price;
+        this.status = ProductStatus.ACTIVO;
+    }
+
+    public Product(String qrCode, String description, Money price) {
+        this.qrCode = qrCode;
+        this.description = description;
+        this.price = price;
+        this.status = ProductStatus.ACTIVO;
+    }
+
+    public Product(String description, Money price, ProductStatus status) {
+        this.description = description;
+        this.price = price;
+        this.status = status;
+    }
+
+    public Product reactivateProduct() {
+        this.status = ProductStatus.ACTIVO;
+        return this;
+    }
+
+    public Product archiveProduct() {
+        this.status = ProductStatus.ARCHIVADO;
+        return this;
+    }
+
+    public Product updateProduct(Money price, String normalizedSentence) {
+        this.description = normalizedSentence;
+        this.price = price;
+
+        return this;
+    }
 }
