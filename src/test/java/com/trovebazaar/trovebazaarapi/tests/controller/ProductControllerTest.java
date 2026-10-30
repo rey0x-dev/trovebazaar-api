@@ -597,7 +597,7 @@ public class ProductControllerTest {
         when(productService.reactivateProduct(productId))
                 .thenReturn(response);
 
-        mockMvc.perform(put("/api/products/{id}/reactive", productId)
+        mockMvc.perform(put("/api/products/{id}/reactivate", productId)
                         .with(user("testuser"))
                         .with(csrf()))
 
