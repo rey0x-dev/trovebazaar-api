@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiError> handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
 
-        ApiError apiError = new ApiError(resourceNotFoundException.getMessage(), LocalDateTime.now(), HttpStatus.CONFLICT.value());
+        ApiError apiError = new ApiError(resourceNotFoundException.getMessage(), LocalDateTime.now(), HttpStatus.NOT_FOUND.value());
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
 
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
             errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
-        ApiError apiError = new ApiError(notValidException.getMessage(), LocalDateTime.now(), errors, HttpStatus.BAD_REQUEST.value());
+        ApiError apiError = new ApiError( "Request validation failed", LocalDateTime.now(), errors, HttpStatus.BAD_REQUEST.value());
 
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
